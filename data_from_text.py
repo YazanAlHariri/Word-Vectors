@@ -23,7 +23,11 @@ def make_distribution(file):
         return r
 
     with open(file, "r") as f:
-        data = "".join(map(lambda x: x if x not in '.,[]()?!:;' else "", f.read())).split("\n")
+        data = f.read().replace(".", "\n").lower()
+    with open(file, "w") as f:
+        f.write(data)
+
+    data = "".join(map(lambda x: x if x not in ',[]()?!:;' else "", data)).split("\n")
 
     words = set()
     for p in data:
